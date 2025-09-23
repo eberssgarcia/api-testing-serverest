@@ -8,7 +8,7 @@ Este proyecto implementa pruebas **E2E (CRUD completo de usuarios)** contra la A
   <tr> 
     <th>
       <h3>
-          <a href="https://github.com/eberssgarcia/api-continuous-testing"> ⏩ <br/> Karate DSL</a>
+          <a href="[https://github.com/eberssgarcia/api-continuous-testing](https://github.com/eberssgarcia/api-testing-serverest.git)"> ⏩ <br/> Karate DSL</a>
       </h3>
    </th>
     <td>Desarrollado en IntelliJ IDEA</td>
