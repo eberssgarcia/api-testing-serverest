@@ -5,9 +5,9 @@ import com.intuit.karate.Runner;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static util.reports.generateReport;
+import static util.cucumberReport.generateReport;
 
-public class labsTest {
+public class runnerTest {
     @Test
     void testParallel() {
         Results results = Runner.path("classpath:bdd")

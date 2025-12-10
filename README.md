@@ -27,7 +27,7 @@ Este proyecto implementa pruebas **E2E (CRUD completo de usuarios)** contra la A
 ## 🛠️ Herramientas y/o tecnologías a usar
 
 - **IntelliJ IDEA** – IDE para desarrollo.
-- **Java 17** – Lenguaje base.
+- **Java JDK 17** – Lenguaje base.
 - **Apache Maven 3.9.9** – Gestión de dependencias y ejecución.
 - **Karate DSL 1.2.0** – Framework de pruebas E2E para APIs.
 - **JUnit 5** – Integración de ejecución (runner).
@@ -36,16 +36,19 @@ Este proyecto implementa pruebas **E2E (CRUD completo de usuarios)** contra la A
 
 ## 📁 Estructura de carpetas
 
-    src/test/java/bdd/serverest/
-    ├── features/              # Features CRUD de usuarios
+    src/test/java/bdd/
+    ├── serverest/      # CRUD de usuarios  
     │   ├── get-users.feature
     │   ├── post-user.feature
     │   ├── get-user-by-id.feature
     │   ├── put-user.feature
     │   └── delete-user.feature
-    ├── request/               # Cuerpos de request JSON
-    ├── schema/                # Validaciones JSON Schema
-    └── utils/                 # Helpers (generador de datos, schemaValidator)
+    ├──── runnerTest.java       # Clase para ejecutar los features
+    ├── request/                # Data tipo request JSON
+    ├── schema/                 # Validaciones JSON Schema
+    └── utils/                  # Helpers (generador de datos, cucumberReport, schemaValidator)
+    karate-config.js            # Configuración global y por ambiente
+    pom.xml                     # Dependencias Maven
 
 ## ⚙️ Configurar proyecto
 
@@ -157,7 +160,8 @@ Feature: Crear usuario
 ```
 
 ## 📊 Reportes
-- Reportes en HTML generados automáticamente en la ruta `target/surefire-reports/karate-summary.html` después de la ejecución de las pruebas.
+- Reporte Karate HTML generados automáticamente `target/surefire-reports/karate-summary.html`.
+- Reporte Cucumber HTML (Opcional) en `target/cucumber-html-reports/overview-features.html`.
 
 ## 🚀 Buenas prácticas
 
