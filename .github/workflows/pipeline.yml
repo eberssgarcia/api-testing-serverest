@@ -1,31 +1,49 @@
-name: Maven Tests
+name: CI - Develop
 
 on:
   push:
-    branches: [main, develop]
+    branches: [ develop ]
   pull_request:
-    branches: [main, develop]
+    branches: [ develop ]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'temurin'
           java-version: '17'
+          cache: 'maven'
 
-      - name: Cache Maven repository
-        uses: actions/cache@v4
+      - name: Build & run tests (including Karate)
+        run: |
+          mvn -B clean test
+
+      # Opcional: si ejecutas Karate con un perfil o módulo específico,
+      # puedes usar algo como:
+      # run: mvn -B clean test -Pkarate
+
+      - name: Upload Karate report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2-
+          name: karate-report
+          # Ajusta las rutas si tu proyecto genera los reportes en otro lugar
+          path: |
+            target/karate-reports/**
+            target/surefire-reports/**
+          retention-days: 7
 
-      - name: Run mvn test
-        run: mvn -B test
+      - name: Add Karate report info to job summary
+        if: always()
+        run: |
+          echo "## Reporte de Karate" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "El reporte HTML de Karate se ha adjuntado como artefacto con el nombre **karate-report**." >> $GITHUB_STEP_SUMMARY
+          echo "Descárgalo desde la sección **Artifacts** de esta ejecución de workflow." >> $GITHUB_STEP_SUMMARY
